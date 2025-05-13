@@ -6,7 +6,8 @@
   "features": {
     "ghcr.io/cirolosapio/devcontainers-features/alpine-bat:0": {},
     "ghcr.io/cirolosapio/devcontainers-features/alpine-gh-cli:0": {},
-    "ghcr.io/cirolosapio/devcontainers-features/alpine-node:0": {}
+    "ghcr.io/cirolosapio/devcontainers-features/alpine-node:0": {},
+    "ghcr.io/cirolosapio/devcontainers-features/alpine-ohmyzsh:0": {}
 },
   "customizations": {
     "vscode": {
@@ -40,6 +41,6 @@
     "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.zshrc,target=/home/vscode/.zshrc",
     "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.oh-my-zsh,target=/home/vscode/.oh-my-zsh",
     "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.p10k.zsh,target=/home/vscode/.p10k.zsh",
-    "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.gnupg,target=/home/vscode/.gnupg"
+    // "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.gnupg,target=/home/vscode/.gnupg"
    ]
 }

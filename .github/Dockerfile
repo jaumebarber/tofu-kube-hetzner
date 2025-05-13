@@ -1,13 +1,11 @@
 FROM alpine:3.21
 
-LABEL org.opencontainers.image.source=https://github.com/jaumebarber/tofu-kube-hetzner
-LABEL org.opencontainers.image.description="CI image for Hetzner Cloud and Tofu"
-LABEL org.opencontainers.image.licenses=MIT
-
 ARG PRODUCT="packer"
 ARG VERSION="1.12.0"
+ARG TERRAFORM_DOCS_VERSION="v0.20.0"
 
 RUN apk update && apk add --no-cache \
+    coreutils \
     curl \
     git \
     gnupg \
@@ -25,22 +23,25 @@ RUN apk update && apk add --no-cache \
     unzip \
     wget \
     which \
-    zip && \
-    apk add --update --virtual .deps --no-cache gnupg && \
-    cd /tmp && \
-    wget https://releases.hashicorp.com/${PRODUCT}/${VERSION}/${PRODUCT}_${VERSION}_linux_amd64.zip && \
+    zip
+
+WORKDIR /tmp
+# Install and verify packer
+RUN wget https://releases.hashicorp.com/${PRODUCT}/${VERSION}/${PRODUCT}_${VERSION}_linux_amd64.zip && \
     wget https://releases.hashicorp.com/${PRODUCT}/${VERSION}/${PRODUCT}_${VERSION}_SHA256SUMS && \
     wget https://releases.hashicorp.com/${PRODUCT}/${VERSION}/${PRODUCT}_${VERSION}_SHA256SUMS.sig && \
     wget -qO- https://www.hashicorp.com/.well-known/pgp-key.txt | gpg --import && \
     gpg --verify ${PRODUCT}_${VERSION}_SHA256SUMS.sig ${PRODUCT}_${VERSION}_SHA256SUMS && \
     grep ${PRODUCT}_${VERSION}_linux_amd64.zip ${PRODUCT}_${VERSION}_SHA256SUMS | sha256sum -c && \
-    unzip /tmp/${PRODUCT}_${VERSION}_linux_amd64.zip -d /tmp && \
-    mv /tmp/${PRODUCT} /usr/local/bin/${PRODUCT} && \
-    rm -f /tmp/${PRODUCT}_${VERSION}_linux_amd64.zip ${PRODUCT}_${VERSION}_SHA256SUMS ${VERSION}/${PRODUCT}_${VERSION}_SHA256SUMS.sig && \
-    apk del .deps && \
-    rm -rf /var/cache/apk/* && \
-    curl -Lo ./terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.20.0/terraform-docs-v0.20.0-$(uname)-amd64.tar.gz && \
-    tar -xzf terraform-docs.tar.gz && \
-    chmod +x terraform-docs  && \
-    mv terraform-docs /usr/local/bin/terraform-docs && \
-    rm terraform-docs.tar.gz
+    unzip ${PRODUCT}_${VERSION}_linux_amd64.zip -d /usr/local/bin && \
+    chmod +x /usr/local/bin/${PRODUCT}
+
+# Install terraform-docs
+RUN curl -Lo /terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/${TERRAFORM_DOCS_VERSION}/terraform-docs-${TERRAFORM_DOCS_VERSION}-$(uname)-amd64.tar.gz && \
+    tar -xzf /terraform-docs.tar.gz -C /usr/local/bin && \
+    chmod +x /usr/local/bin/terraform-docs && \
+    rm /terraform-docs.tar.gz
+
+WORKDIR /root
+
+RUN git config --global --add safe.directory '*'

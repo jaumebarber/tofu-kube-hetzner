@@ -1,4 +1,4 @@
-name: Build and Push Container
+name: Build and push container
 on:
   push:
     branches: 
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-ci
+  IMAGE_NAME: ${{ github.repository }}
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .github
+          context: .
           file: .github/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
