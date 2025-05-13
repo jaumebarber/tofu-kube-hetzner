@@ -1,0 +1,49 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/jekyll
+{
+	"build": {
+		"dockerfile": "./Dockerfile",
+		"context": "../"
+	},
+  "features": {
+    "ghcr.io/cirolosapio/devcontainers-features/alpine-bat:0": {},
+    "ghcr.io/cirolosapio/devcontainers-features/alpine-gh-cli:0": {},
+    "ghcr.io/cirolosapio/devcontainers-features/alpine-node:0": {}
+},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "catppuccin.catppuccin-vsc",
+        "pkief.material-icon-theme",
+        "sonarsource.sonarlint-vscode",
+        "yzhang.markdown-all-in-one",
+        "ms-azuretools.vscode-containers",
+        "github.vscode-github-actions",
+        "gruntfuggly.todo-tree",
+        "eamodio.gitlens",
+        "4ops.terraform"
+      ],
+      "settings": {
+        "sonarlint.ls.javaHome": "/usr/lib/jvm/java-21-openjdk",
+        "sonarlint.pathToNodeExecutable": "/usr/bin/node",
+        "workbench.colorTheme": "Catppuccin Mocha",
+        "workbench.iconTheme": "material-icon-theme",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "terminal.integrated.defaultProfile.linux": "zsh",
+          "zsh": {
+            "path": "zsh"
+          }
+        }
+      }
+    },
+  "mounts": [
+    // persist ssh keys in readonly mode so that git can be used
+    "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.ssh,target=/home/vscode/.ssh",
+    "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.zshrc,target=/home/vscode/.zshrc",
+    "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.oh-my-zsh,target=/home/vscode/.oh-my-zsh",
+    "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.p10k.zsh,target=/home/vscode/.p10k.zsh",
+    "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.gnupg,target=/home/vscode/.gnupg"
+
+   ]
+}

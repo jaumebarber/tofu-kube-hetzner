@@ -210,4 +210,3 @@ delete_autoscaled_nodes
 if (( DELETE_SNAPSHOTS == 1 )); then
   delete_snapshots
 fi
-

@@ -68,4 +68,3 @@ resource "hcloud_firewall" "k3s" {
     }
   }
 }
-

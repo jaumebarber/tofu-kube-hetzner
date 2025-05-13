@@ -4,7 +4,9 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | >= 6.4.0 |
+| <a name="requirement_hcloud"></a> [hcloud](#requirement\_hcloud) | >= 1.49.1 |
 | <a name="requirement_hcloud"></a> [hcloud](#requirement\_hcloud) | >= 1.49.1 |
 | <a name="requirement_local"></a> [local](#requirement\_local) | >= 2.5.2 |
 | <a name="requirement_remote"></a> [remote](#requirement\_remote) | >= 0.1.3 |
@@ -15,7 +17,7 @@
 |------|---------|
 | <a name="provider_cloudinit"></a> [cloudinit](#provider\_cloudinit) | n/a |
 | <a name="provider_github"></a> [github](#provider\_github) | >= 6.4.0 |
-| <a name="provider_hcloud"></a> [hcloud](#provider\_hcloud) | >= 1.49.1 |
+| <a name="provider_hcloud"></a> [hcloud](#provider\_hcloud) | >= 1.49.1 >= 1.49.1 |
 | <a name="provider_local"></a> [local](#provider\_local) | >= 2.5.2 |
 | <a name="provider_null"></a> [null](#provider\_null) | n/a |
 | <a name="provider_random"></a> [random](#provider\_random) | n/a |
@@ -27,6 +29,7 @@
 |------|--------|---------|
 | <a name="module_agents"></a> [agents](#module\_agents) | ./modules/host | n/a |
 | <a name="module_control_planes"></a> [control\_planes](#module\_control\_planes) | ./modules/host | n/a |
+| <a name="module_kube-hetzner"></a> [kube-hetzner](#module\_kube-hetzner) | kube-hetzner/kube-hetzner/hcloud | n/a |
 
 ### Resources
 
