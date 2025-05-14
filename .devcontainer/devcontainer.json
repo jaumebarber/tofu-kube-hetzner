@@ -1,5 +1,3 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/jekyll
 {
 	"build": {
 		"dockerfile": "./Dockerfile",
@@ -38,12 +36,10 @@
       }
     },
   "mounts": [
-    // persist ssh keys in readonly mode so that git can be used
     "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.ssh,target=/home/vscode/.ssh",
     "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.zshrc,target=/home/vscode/.zshrc",
     "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.oh-my-zsh,target=/home/vscode/.oh-my-zsh",
     "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.p10k.zsh,target=/home/vscode/.p10k.zsh",
     "type=bind,source=${localEnv:HOME}${env:USERPROFILE}/.gnupg,target=/home/vscode/.gnupg"
-
    ]
 }

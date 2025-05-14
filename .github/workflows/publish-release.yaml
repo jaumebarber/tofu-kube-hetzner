@@ -5,9 +5,7 @@ on:
   push:
     tags:
       - '*'
-  workflow_dispatch:
-      tags:
-        - '*'
+  workflow_dispatch: {}
 jobs:
   Release:
     name: Release
